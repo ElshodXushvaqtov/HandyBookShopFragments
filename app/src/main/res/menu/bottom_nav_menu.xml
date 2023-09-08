@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/all_books"
+        android:icon="@drawable/baseline_menu_book_24"
+        />
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/baseline_search_24_grey" />
+    <item
+        android:id="@+id/articles"
+        android:icon="@drawable/baseline_article_24_grey" />
+    <item
+        android:id="@+id/saved"
+        android:icon="@drawable/baseline_bookmark_border_24" />
+    <item
+        android:id="@+id/language"
+        android:icon="@drawable/baseline_language_24_grey" />
+</menu>
