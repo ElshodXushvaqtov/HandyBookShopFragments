@@ -14,4 +14,9 @@
             @anim/slide_out
         </item>
     </style>
+    <style name="roundedImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+        <item name="color">@color/white</item>
+    </style>
 </resources>

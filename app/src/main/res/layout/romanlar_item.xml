@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="235dp"
+    android:layout_height="130dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="220dp"
+        android:layout_height="120dp"
+        android:backgroundTint="#F3F3F3"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageView8"
+            android:layout_width="96dp"
+            android:layout_height="104dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="-50dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:shapeAppearanceOverlay="@style/roundedImage"
+            app:srcCompat="@drawable/otkankunlar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="123dp"
+            android:layout_marginTop="10dp"
+            android:text="O'tkan\nKunlar"
+            android:textColor="#0F1D4C"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="123dp"
+            android:layout_marginTop="55dp"
+            android:text="Abdulla Qodiriy"
+            android:textColor="#C6C6C6"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="123dp"
+            android:layout_marginTop="85dp"
+            app:srcCompat="@drawable/rating" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="141dp"
+            android:layout_marginTop="82dp"
+            android:text="5.0"
+            android:textColor="#0F1D4C" />
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

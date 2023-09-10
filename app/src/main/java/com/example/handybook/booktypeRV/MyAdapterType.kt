@@ -1,4 +1,4 @@
-package com.example.handybook.bookType_rv
+package com.example.handybook.booktypeRV
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.handybook.R
 
-class MyAdapter(private val typeList: ArrayList<BookType>) :
-    RecyclerView.Adapter<MyAdapter.MyHolder>() {
+class MyAdapterType(private val typeList: ArrayList<BookTypeData>) :
+    RecyclerView.Adapter<MyAdapterType.MyHolder>() {
 
     class MyHolder(view: View) : RecyclerView.ViewHolder(view) {
 
