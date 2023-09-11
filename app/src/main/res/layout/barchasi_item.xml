@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="175dp"
+    android:layout_height="315dp">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/barchasi_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/otkankunlar_big" />
+
+        <TextView
+            android:id="@+id/barchasi_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="230dp"
+            android:text="O'tkan kunlar"
+            android:textColor="#0F1D4C"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/barchasi_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abdulla Qodiriy"
+            android:textColor="#D9D9D9"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="255dp"/>
+
+        <TextView
+            android:id="@+id/barchasi_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$12.00"
+            android:textColor="#B8E8F2"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="280dp"
+            />
+<androidx.cardview.widget.CardView
+    android:layout_width="45dp"
+    android:layout_height="20dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginStart="110dp"
+    app:cardCornerRadius="5dp"
+    android:backgroundTint="@color/white">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/rating"/>
+    <TextView
+        android:id="@+id/rating_barchasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5.0"
+        android:textColor="#0F344C"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="20dp"/>
+</androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

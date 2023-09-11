@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
-import com.example.handybook.booktypeRV.BookTypeData
-import com.example.handybook.booktypeRV.MyAdapterType
+import androidx.navigation.fragment.findNavController
+import com.example.handybook.Darsliklar.DarsliklarData
+import com.example.handybook.Darsliklar.MyAdapterDarsliklar
+import com.example.handybook.BookType.BookTypeData
+import com.example.handybook.BookType.MyAdapterType
 import com.example.handybook.databinding.FragmentBoshSahifaBinding
 import com.example.handybook.romanlarRV.MyAdapterBook
 import com.example.handybook.romanlarRV.RomanlarData
@@ -22,8 +25,8 @@ class BoshSahifaFragment : Fragment() {
     private lateinit var binding: FragmentBoshSahifaBinding
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var typesArray: ArrayList<BookTypeData>
-    private lateinit var adapter: MyAdapterType
     private lateinit var arrRoman: ArrayList<RomanlarData>
+    private lateinit var darsliklarArray: ArrayList<DarsliklarData>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -37,19 +40,28 @@ class BoshSahifaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBoshSahifaBinding.inflate(layoutInflater)
-        dataType()
 
-        binding.typeRV.setHasFixedSize(true)
-        adapter = MyAdapterType(typesArray)
-        binding.typeRV.adapter = adapter
-        arrRoman = arrayListOf()
         toggle =
             ActionBarDrawerToggle(activity, binding.drawerLayout, R.string.open, R.string.close)
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        dataType()
+        binding.typeRV.setHasFixedSize(true)
+        binding.typeRV.adapter = MyAdapterType(typesArray)
+
         dataBooks()
         binding.romanlarRv.setHasFixedSize(true)
         binding.romanlarRv.adapter = MyAdapterBook(arrRoman)
+
+        dataDarsliklar()
+        binding.darsliklarRV.setHasFixedSize(true)
+        binding.darsliklarRV.adapter=MyAdapterDarsliklar(darsliklarArray)
+
+        binding.barchaKitoblarTxt.setOnClickListener{
+            findNavController().navigate(R.id.action_boshSahifaFragment_to_barchasiFragment)
+        }
+
         return binding.root
     }
 
@@ -130,6 +142,19 @@ class BoshSahifaFragment : Fragment() {
             )
         )
 
+
+    }
+
+    private fun dataDarsliklar() {
+
+        darsliklarArray = arrayListOf()
+
+        darsliklarArray.add(DarsliklarData(R.drawable.algebra))
+        darsliklarArray.add(DarsliklarData(R.drawable.fizika))
+        darsliklarArray.add(DarsliklarData(R.drawable.ona_tili))
+        darsliklarArray.add(DarsliklarData(R.drawable.algebra))
+        darsliklarArray.add(DarsliklarData(R.drawable.fizika))
+        darsliklarArray.add(DarsliklarData(R.drawable.ona_tili))
 
     }
 

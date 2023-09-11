@@ -1,4 +1,4 @@
-package com.example.handybook.booktypeRV
+package com.example.handybook.BookType
 
 import android.view.LayoutInflater
 import android.view.View
