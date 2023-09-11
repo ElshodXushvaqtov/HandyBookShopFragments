@@ -9,19 +9,21 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import com.example.handybook.booktypeRV.BookTypeData
 import com.example.handybook.booktypeRV.MyAdapterType
 import com.example.handybook.databinding.FragmentBoshSahifaBinding
+import com.example.handybook.romanlarRV.MyAdapterBook
+import com.example.handybook.romanlarRV.RomanlarData
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class BoshSahifaFragment : Fragment(){
+class BoshSahifaFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentBoshSahifaBinding
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var typesArray: ArrayList<BookTypeData>
     private lateinit var adapter: MyAdapterType
-    lateinit var typesName: ArrayList<String>
+    private lateinit var arrRoman: ArrayList<RomanlarData>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,15 +37,19 @@ class BoshSahifaFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBoshSahifaBinding.inflate(layoutInflater)
-        data()
+        dataType()
+
         binding.typeRV.setHasFixedSize(true)
         adapter = MyAdapterType(typesArray)
         binding.typeRV.adapter = adapter
-
-            toggle= ActionBarDrawerToggle(activity,binding.drawerLayout,R.string.open,R.string.close)
-            binding.drawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
-
+        arrRoman = arrayListOf()
+        toggle =
+            ActionBarDrawerToggle(activity, binding.drawerLayout, R.string.open, R.string.close)
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+        dataBooks()
+        binding.romanlarRv.setHasFixedSize(true)
+        binding.romanlarRv.adapter = MyAdapterBook(arrRoman)
         return binding.root
     }
 
@@ -58,7 +64,7 @@ class BoshSahifaFragment : Fragment(){
             }
     }
 
-    private fun data() {
+    private fun dataType() {
 
         typesArray = arrayListOf()
 
@@ -70,8 +76,63 @@ class BoshSahifaFragment : Fragment(){
         typesArray.add(BookTypeData("Diniy Kitoblar"))
         typesArray.add(BookTypeData("Bepul Kitoblar"))
         typesArray.add(BookTypeData("Romanlar"))
+    }
+
+    private fun dataBooks() {
+
+        arrRoman = arrayListOf()
+        arrRoman.add(
+            RomanlarData(
+                "O'tkan Kunlar",
+                R.drawable.otkankunlar,
+                "Abdulla Qodiriy",
+                "5.0"
+            )
+        )
+        arrRoman.add(
+            RomanlarData(
+                "Ikki Eshik Orasi",
+                R.drawable.ikkieshik_orasi,
+                "O'tkir Hoshimov",
+                "4.9"
+            )
+        )
+        arrRoman.add(
+            RomanlarData(
+                "Urush Tugasa",
+                R.drawable.urush_tugasa,
+                "Qo'chqor Norqobilov",
+                "4.8"
+            )
+        )
+        arrRoman.add(
+            RomanlarData(
+                "O'tkan Kunlar",
+                R.drawable.otkankunlar,
+                "Abdulla Qodiriy",
+                "5.0"
+            )
+        )
+        arrRoman.add(
+            RomanlarData(
+                "Ikki Eshik Orasi",
+                R.drawable.ikkieshik_orasi,
+                "O'tkir Hoshimov",
+                "4.9"
+            )
+        )
+        arrRoman.add(
+            RomanlarData(
+                "Urush Tugasa",
+                R.drawable.urush_tugasa,
+                "Qo'chqor Norqobilov",
+                "4.8"
+            )
+        )
+
 
     }
+
 }
 
 

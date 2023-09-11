@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/bookImg"
             android:layout_width="96dp"
             android:layout_height="104dp"
             android:layout_gravity="center"
@@ -27,6 +27,7 @@
             app:srcCompat="@drawable/otkankunlar" />
 
         <TextView
+            android:id="@+id/book_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="123dp"
@@ -37,6 +38,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="123dp"
@@ -46,7 +48,7 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:id="@+id/imageView15"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="123dp"
@@ -54,6 +56,7 @@
             app:srcCompat="@drawable/rating" />
 
         <TextView
+            android:id="@+id/bookRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="141dp"
