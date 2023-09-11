@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".Login_Reg.LoginFragment">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -53,6 +53,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/email_kirish"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,9 +76,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
+        app:endIconMode="password_toggle"
         app:layout_constraintTop_toBottomOf="@+id/parol">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/parol_kirish"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword" />

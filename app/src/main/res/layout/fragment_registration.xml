@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationFragment">
+    tools:context=".Login_Reg.RegistrationFragment">
 
     <ImageView
         android:id="@+id/back_to_login"
@@ -54,6 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ism_reg">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ismReg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
@@ -83,6 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/familiya_reg">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/familiyaReg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
@@ -112,6 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email_reg">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailReg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
@@ -138,16 +141,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
+        app:endIconMode="password_toggle"
         app:layout_constraintTop_toBottomOf="@+id/parol_reg">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/parolReg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/parol_check_reg"
+        android:id="@+id/parol_check_reg_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -167,9 +172,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parol_check_reg">
+        app:endIconMode="password_toggle"
+        app:layout_constraintTop_toBottomOf="@+id/parol_check_reg_txt">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/parol_checkReg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword" />

@@ -1,4 +1,4 @@
-package com.example.handybook
+package com.example.handybook.Login_Reg
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.handybook.R
 import com.example.handybook.databinding.FragmentRegistrationBinding
 
 private const val ARG_PARAM1 = "param1"
@@ -31,7 +33,17 @@ class RegistrationFragment : Fragment() {
     ): View {
         binding = FragmentRegistrationBinding.inflate(layoutInflater)
         binding.royhatdanOtishBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_registrationFragment_to_boshSahifaFragment)
+            if (binding.ismReg.text!!.isNotEmpty() && binding.familiyaReg.text!!.isNotEmpty() && binding.emailReg.text!!.isNotEmpty() && binding.parolReg.text!!.isNotEmpty() && binding.parolCheckReg.text!!.isNotEmpty()) {
+                Toast.makeText(requireContext(), "Successfully Registered :)", Toast.LENGTH_SHORT)
+                    .show()
+                findNavController().navigate(R.id.action_registrationFragment_to_boshSahifaFragment)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Please, complete all prompts above!!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         binding.backToLogin.setOnClickListener {
             findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
