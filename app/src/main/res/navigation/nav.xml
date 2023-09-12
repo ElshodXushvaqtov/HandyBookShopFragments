@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_splashFragment_to_splashScreen"
             app:destination="@id/splashScreen" />
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/barchasiFragment"

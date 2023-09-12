@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.example.handybook.databinding.FragmentSplashBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
 class SplashFragment : Fragment() {
     lateinit var binding: FragmentSplashBinding
     private var param1: String? = null
@@ -29,10 +31,23 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding=FragmentSplashBinding.inflate(layoutInflater)
-Handler(Looper.getMainLooper()).postDelayed({
-findNavController().navigate(R.id.action_splashFragment_to_splashScreen)
-},2500)
+        binding = FragmentSplashBinding.inflate(layoutInflater)
+        val shared = requireContext().getSharedPreferences("shared", AppCompatActivity.MODE_PRIVATE)
+        var users = shared.getString("users", "")
+        var isLoggedOut = shared.getBoolean("isLoggedOut", false)
+        Handler(Looper.getMainLooper()).postDelayed({
+
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (users == "") {
+                    findNavController().navigate(R.id.action_splashFragment_to_splashScreen)
+                } else if (isLoggedOut) {
+                    findNavController().navigate(R.id.action_splashScreen_to_loginFragment)
+                } else {
+                    findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
+                }
+            }, 3000)
+        }, 2500)
         return binding.root
     }
 

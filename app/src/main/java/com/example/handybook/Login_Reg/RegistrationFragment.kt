@@ -1,7 +1,12 @@
 package com.example.handybook.Login_Reg
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +45,11 @@ class RegistrationFragment : Fragment() {
         val edit = shared.edit()
         val gson = Gson()
         val convert = object : TypeToken<List<User>>() {}.type
-
+        val dialogBinding = layoutInflater.inflate(R.layout.custom_dialog, null)
+        val myDialog = Dialog(requireContext())
+        myDialog.setContentView(dialogBinding)
+        myDialog.setCancelable(true)
+        myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.royhatdanOtishBtn.setOnClickListener {
             var users = shared.getString("users", "")
@@ -55,13 +64,19 @@ class RegistrationFragment : Fragment() {
                 binding.emailReg.text.toString(),
             )
 
-            if (validate()) {
+            if (check()) {
                 userList.add(user)
 
-                val str = gson.toJson(userList)
-                edit.putString("users", str).apply()
-                findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
-                shared.edit().putString("active_user", gson.toJson(user)).apply()
+                val s = gson.toJson(userList)
+
+                edit.putString("users", s).apply()
+                myDialog.show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                    shared.edit().putString("active_user", gson.toJson(user)).apply()
+                    myDialog.dismiss()
+                }, 2000)
+
             }
         }
         binding.backToLogin.setOnClickListener {
@@ -81,7 +96,7 @@ class RegistrationFragment : Fragment() {
             }
     }
 
-    private fun validate(): Boolean {
+    private fun check(): Boolean {
         if (binding.ismReg.text.toString().isEmpty() || binding.parolReg.text.toString()
                 .isEmpty() || binding.emailReg.text.toString()
                 .isEmpty() || binding.parolCheckReg.text.toString().isEmpty()
