@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.example.handybook.R
 import com.example.handybook.databinding.FragmentRegistrationBinding
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -18,6 +21,7 @@ private const val ARG_PARAM2 = "param2"
 class RegistrationFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
+    private var userList = mutableListOf<User>()
     private lateinit var binding: FragmentRegistrationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +36,32 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegistrationBinding.inflate(layoutInflater)
+        val shared = requireContext().getSharedPreferences("shared", AppCompatActivity.MODE_PRIVATE)
+        val edit = shared.edit()
+        val gson = Gson()
+        val convert = object : TypeToken<List<User>>() {}.type
+
+
         binding.royhatdanOtishBtn.setOnClickListener {
-            if (binding.ismReg.text!!.isNotEmpty() && binding.familiyaReg.text!!.isNotEmpty() && binding.emailReg.text!!.isNotEmpty() && binding.parolReg.text!!.isNotEmpty() && binding.parolCheckReg.text!!.isNotEmpty()) {
-                Toast.makeText(requireContext(), "Successfully Registered :)", Toast.LENGTH_SHORT)
-                    .show()
-                findNavController().navigate(R.id.action_registrationFragment_to_boshSahifaFragment)
+            var users = shared.getString("users", "")
+            if (users != "") {
+                userList = mutableListOf()
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Please, complete all prompts above!!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                userList = gson.fromJson(users, convert)
+            }
+            var user = User(
+                binding.ismReg.text.toString(),
+                binding.parolReg.text.toString(),
+                binding.emailReg.text.toString(),
+            )
+
+            if (validate()) {
+                userList.add(user)
+
+                val str = gson.toJson(userList)
+                edit.putString("users", str).apply()
+                findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                shared.edit().putString("active_user", gson.toJson(user)).apply()
             }
         }
         binding.backToLogin.setOnClickListener {
@@ -60,5 +79,34 @@ class RegistrationFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun validate(): Boolean {
+        if (binding.ismReg.text.toString().isEmpty() || binding.parolReg.text.toString()
+                .isEmpty() || binding.emailReg.text.toString()
+                .isEmpty() || binding.parolCheckReg.text.toString().isEmpty()
+        ) {
+            Toast.makeText(requireContext(), "Fill the gaps", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (binding.parolReg.text.toString() != binding.parolCheckReg.text.toString()) {
+            Toast.makeText(requireContext(), "Your password does not matched", Toast.LENGTH_SHORT)
+                .show()
+            return false
+        }
+
+        for (i in userList.indices) {
+            if (binding.ismReg.text.toString() == userList[i].username) {
+                Toast.makeText(
+                    requireContext(),
+                    "User with this username already registered",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+        }
+
+        return true
     }
 }

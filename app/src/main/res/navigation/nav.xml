@@ -14,8 +14,8 @@
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_boshSahifaFragment"
-            app:destination="@id/boshSahifaFragment" />
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
@@ -38,21 +38,17 @@
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_registrationFragment_to_boshSahifaFragment"
-            app:destination="@id/boshSahifaFragment" />
+            android:id="@+id/action_registrationFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_self"
+            app:destination="@id/registrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/boshSahifaFragment"
         android:name="com.example.handybook.BoshSahifaFragment"
         android:label="fragment_bosh_sahifa"
-        tools:layout="@layout/fragment_bosh_sahifa" >
-        <action
-            android:id="@+id/action_boshSahifaFragment_to_batafsilFragment"
-            app:destination="@id/batafsilFragment" />
-        <action
-            android:id="@+id/action_boshSahifaFragment_to_barchasiFragment"
-            app:destination="@id/barchasiFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_bosh_sahifa" />
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.handybook.SplashFragment"
@@ -71,16 +67,25 @@
             android:id="@+id/action_barchasiFragment_to_batafsilFragment"
             app:destination="@id/batafsilFragment" />
         <action
-            android:id="@+id/action_barchasiFragment_to_boshSahifaFragment"
-            app:destination="@id/boshSahifaFragment" />
+            android:id="@+id/action_barchasiFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/batafsilFragment"
         android:name="com.example.handybook.BatafsilFragment"
         android:label="fragment_batafsil"
-        tools:layout="@layout/fragment_batafsil" >
+        tools:layout="@layout/fragment_batafsil" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.handybook.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_batafsilFragment_to_boshSahifaFragment"
-            app:destination="@id/boshSahifaFragment" />
+            android:id="@+id/action_mainFragment_to_barchasiFragment"
+            app:destination="@id/barchasiFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_batafsilFragment"
+            app:destination="@id/batafsilFragment" />
     </fragment>
 </navigation>

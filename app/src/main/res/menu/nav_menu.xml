@@ -20,7 +20,7 @@
             android:title="Saqlangan kitoblar"/>
         <item android:id="@+id/lang_nav"
             android:icon="@drawable/baseline_language_24"
-            android:title="Tilni oz'gartirish"/>
+            android:title="Settings"/>
 
     </group>
     <item android:title="">

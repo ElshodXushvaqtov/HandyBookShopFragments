@@ -1,16 +1,17 @@
 package com.example.handybook
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.handybook.Darsliklar.DarsliklarData
-import com.example.handybook.Darsliklar.MyAdapterDarsliklar
 import com.example.handybook.BookType.BookTypeData
 import com.example.handybook.BookType.MyAdapterType
+import com.example.handybook.Darsliklar.DarsliklarData
+import com.example.handybook.Darsliklar.MyAdapterDarsliklar
 import com.example.handybook.databinding.FragmentBoshSahifaBinding
 import com.example.handybook.romanlarRV.MyAdapterBook
 import com.example.handybook.romanlarRV.RomanlarData
@@ -23,7 +24,6 @@ class BoshSahifaFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentBoshSahifaBinding
-    private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var typesArray: ArrayList<BookTypeData>
     private lateinit var arrRoman: ArrayList<RomanlarData>
     private lateinit var darsliklarArray: ArrayList<DarsliklarData>
@@ -41,11 +41,6 @@ class BoshSahifaFragment : Fragment() {
     ): View {
         binding = FragmentBoshSahifaBinding.inflate(layoutInflater)
 
-        toggle =
-            ActionBarDrawerToggle(activity, binding.drawerLayout, R.string.open, R.string.close)
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
         dataType()
         binding.typeRV.setHasFixedSize(true)
         binding.typeRV.adapter = MyAdapterType(typesArray)
@@ -56,10 +51,10 @@ class BoshSahifaFragment : Fragment() {
 
         dataDarsliklar()
         binding.darsliklarRV.setHasFixedSize(true)
-        binding.darsliklarRV.adapter=MyAdapterDarsliklar(darsliklarArray)
+        binding.darsliklarRV.adapter = MyAdapterDarsliklar(darsliklarArray)
 
-        binding.barchaKitoblarTxt.setOnClickListener{
-            findNavController().navigate(R.id.action_boshSahifaFragment_to_barchasiFragment)
+        binding.barchaKitoblarTxt.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_barchasiFragment)
         }
 
         return binding.root
