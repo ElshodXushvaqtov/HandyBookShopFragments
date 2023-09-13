@@ -96,6 +96,8 @@ class MainFragment : Fragment() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+        val transaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.commit()
     }
 }

@@ -1,14 +1,22 @@
 package com.example.handybook.romanlarRV
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.handybook.Barchasi.MyAdapterBarchasi
 import com.example.handybook.R
 
-class MyAdapterBook(private val arrBook: ArrayList<RomanlarData>) :
+class MyAdapterBook(
+    private val arrBook: ArrayList<RomanlarData>, var context: Context,
+    private var myInterface: MyAdapterBook.MyInterface = object :
+        MyAdapterBook.MyInterface {
+        override fun onItemTap(book: RomanlarData) {}
+    }
+) :
     RecyclerView.Adapter<MyAdapterBook.MyHolder>() {
 
 
@@ -20,6 +28,10 @@ class MyAdapterBook(private val arrBook: ArrayList<RomanlarData>) :
         val bookRating: TextView = itemView.findViewById(R.id.bookRating)
 
 
+    }
+
+    interface MyInterface {
+        fun onItemTap(book: RomanlarData)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
@@ -38,6 +50,10 @@ class MyAdapterBook(private val arrBook: ArrayList<RomanlarData>) :
         holder.bookAuthor.text = book.bookAuthor
         holder.bookImg.setImageResource(book.bookImg)
         holder.bookRating.text = book.bookRating
+
+        holder.itemView.setOnClickListener {
+            myInterface.onItemTap(book)
+        }
     }
 
 

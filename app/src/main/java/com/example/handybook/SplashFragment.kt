@@ -33,8 +33,8 @@ class SplashFragment : Fragment() {
     ): View {
         binding = FragmentSplashBinding.inflate(layoutInflater)
         val shared = requireContext().getSharedPreferences("shared", AppCompatActivity.MODE_PRIVATE)
-        var users = shared.getString("users", "")
-        var isLoggedOut = shared.getBoolean("isLoggedOut", false)
+        val users = shared.getString("users", "")
+        val isLoggedOut = shared.getBoolean("isLoggedOut", false)
         Handler(Looper.getMainLooper()).postDelayed({
 
 

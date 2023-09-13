@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.handybook.Barchasi.BarchasiData
 import com.example.handybook.Barchasi.MyAdapterBarchasi
 import com.example.handybook.databinding.FragmentBarchasiBinding
+import com.example.handybook.module.Book
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -37,7 +37,7 @@ class BarchasiFragment : Fragment() {
         barchasiData()
         binding.barchasiRv.setHasFixedSize(true)
         binding.barchasiRv.layoutManager = GridLayoutManager(requireParentFragment().context, 2)
-        binding.barchasiRv.adapter = MyAdapterBarchasi(barchasiArr)
+        binding.barchasiRv.adapter = MyAdapterBarchasi(barchasiArr, requireContext())
 
         return binding.root
     }

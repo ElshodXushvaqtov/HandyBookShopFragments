@@ -26,7 +26,9 @@ private const val ARG_PARAM2 = "param2"
 class RegistrationFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
-    private var userList = mutableListOf<User>()
+    private lateinit var user: User
+
+    //    private var userList = mutableListOf<User>()
     private lateinit var binding: FragmentRegistrationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class RegistrationFragment : Fragment() {
         }
     }
 
+    @SuppressLint("InflateParams")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,25 +53,27 @@ class RegistrationFragment : Fragment() {
         myDialog.setContentView(dialogBinding)
         myDialog.setCancelable(true)
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
+        user = User(
+            binding.ismReg.text.toString(),
+            binding.parolReg.text.toString(),
+            binding.emailReg.text.toString(),
+        )
         binding.royhatdanOtishBtn.setOnClickListener {
-            var users = shared.getString("users", "")
-            if (users != "") {
-                userList = mutableListOf()
-            } else {
-                userList = gson.fromJson(users, convert)
-            }
-            var user = User(
-                binding.ismReg.text.toString(),
-                binding.parolReg.text.toString(),
-                binding.emailReg.text.toString(),
-            )
+            val users = shared.getString("users", "")
+//            if (users != "") {
+                user = User(
+                    binding.ismReg.text.toString(),
+                    binding.parolReg.text.toString(),
+                    binding.emailReg.text.toString(),
+                )
+//            }
+//            else {
+//                user = gson.fromJson(users, convert)
+//            }
+
 
             if (check()) {
-                userList.add(user)
-
-                val s = gson.toJson(userList)
-
+                val s = gson.toJson(user)
                 edit.putString("users", s).apply()
                 myDialog.show()
                 Handler(Looper.getMainLooper()).postDelayed({
@@ -101,26 +106,25 @@ class RegistrationFragment : Fragment() {
                 .isEmpty() || binding.emailReg.text.toString()
                 .isEmpty() || binding.parolCheckReg.text.toString().isEmpty()
         ) {
-            Toast.makeText(requireContext(), "Fill the gaps", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Complete all gaps!", Toast.LENGTH_SHORT).show()
             return false
         }
 
-        if (binding.parolReg.text.toString() != binding.parolCheckReg.text.toString()) {
-            Toast.makeText(requireContext(), "Your password does not matched", Toast.LENGTH_SHORT)
-                .show()
-            return false
-        }
+//        if (binding.parolReg.text.toString() != binding.parolCheckReg.text.toString()) {
+//            Toast.makeText(requireContext(), "Your password isn't the same!", Toast.LENGTH_SHORT)
+//                .show()
+//            return false
+//        }
 
-        for (i in userList.indices) {
-            if (binding.ismReg.text.toString() == userList[i].username) {
-                Toast.makeText(
-                    requireContext(),
-                    "User with this username already registered",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return false
-            }
-        }
+//        for (i in userList.indices) {
+//            if (binding.ismReg.text.toString() == userList[i].username) {
+//                Toast.makeText(
+//                    requireContext(),
+//                    "User with this username already registered",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                return false
+//            }
 
         return true
     }

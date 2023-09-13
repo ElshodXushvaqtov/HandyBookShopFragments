@@ -1,5 +1,6 @@
 package com.example.handybook.Barchasi
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.handybook.R
+import com.example.handybook.module.Book
 
-class MyAdapterBarchasi(private val barchasiArray: ArrayList<BarchasiData>) :
+class MyAdapterBarchasi(
+    private val barchasiArray: ArrayList<BarchasiData>, var context: Context,
+    private var myInterface: MyInterface = object : MyInterface {
+        override fun onItemTap(book: BarchasiData) {}
+    }
+) :
     RecyclerView.Adapter<MyAdapterBarchasi.MyHolder>() {
 
     class MyHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -19,6 +26,10 @@ class MyAdapterBarchasi(private val barchasiArray: ArrayList<BarchasiData>) :
         var rating: TextView = view.findViewById(R.id.rating_barchasi)
         var price: TextView = view.findViewById(R.id.rating_barchasi)
 
+    }
+
+    interface MyInterface {
+        fun onItemTap(book: BarchasiData)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
@@ -40,6 +51,10 @@ class MyAdapterBarchasi(private val barchasiArray: ArrayList<BarchasiData>) :
         holder.price.text = barchasi_arr.price
         holder.author.text = barchasi_arr.author
         holder.rating.text = barchasi_arr.rating
+
+        holder.itemView.setOnClickListener {
+            myInterface.onItemTap(barchasi_arr)
+        }
     }
 
 

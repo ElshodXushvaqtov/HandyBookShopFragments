@@ -1,5 +1,11 @@
 package com.example.handybook.Barchasi
 
-data class BarchasiData(var name: String, var img: Int, var author: String, var price: String,var rating:String) {
+import java.io.Serializable
 
-}
+data class BarchasiData(
+    var name: String,
+    var img: Int,
+    var author: String,
+    var price: String,
+    var rating: String
+):Serializable

@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.handybook.BookType.BookTypeData
@@ -47,7 +45,7 @@ class BoshSahifaFragment : Fragment() {
 
         dataBooks()
         binding.romanlarRv.setHasFixedSize(true)
-        binding.romanlarRv.adapter = MyAdapterBook(arrRoman)
+        binding.romanlarRv.adapter = MyAdapterBook(arrRoman, requireContext())
 
         dataDarsliklar()
         binding.darsliklarRV.setHasFixedSize(true)
