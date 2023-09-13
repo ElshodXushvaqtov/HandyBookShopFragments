@@ -28,7 +28,7 @@ class RegistrationFragment : Fragment() {
     private var param2: String? = null
     private lateinit var user: User
 
-    //    private var userList = mutableListOf<User>()
+    private var userList = mutableListOf<User>()
     private lateinit var binding: FragmentRegistrationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,17 +60,17 @@ class RegistrationFragment : Fragment() {
         )
         binding.royhatdanOtishBtn.setOnClickListener {
             val users = shared.getString("users", "")
-//            if (users != "") {
-                user = User(
-                    binding.ismReg.text.toString(),
-                    binding.parolReg.text.toString(),
-                    binding.emailReg.text.toString(),
-                )
-//            }
-//            else {
-//                user = gson.fromJson(users, convert)
-//            }
-
+            if (users == "") {
+            userList= mutableListOf()
+            }
+            else {
+                user = gson.fromJson(users, convert)
+            }
+            user = User(
+                binding.ismReg.text.toString(),
+                binding.parolReg.text.toString(),
+                binding.emailReg.text.toString(),
+            )
 
             if (check()) {
                 val s = gson.toJson(user)

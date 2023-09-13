@@ -52,7 +52,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/filter"
             android:layout_width="33dp"
             android:layout_height="49dp"
             android:layout_marginTop="16dp"
