@@ -1,3 +1,5 @@
 package com.example.handybook.romanlarRV
 
-data class RomanlarData(var bookName:String,var bookImg:Int,var bookAuthor:String,var bookRating:String)
+import java.io.Serializable
+
+data class RomanlarData(var bookName:String,var bookImg:Int,var bookAuthor:String,var bookRating:String):Serializable

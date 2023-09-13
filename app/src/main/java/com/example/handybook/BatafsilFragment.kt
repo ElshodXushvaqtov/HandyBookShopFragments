@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.handybook.Barchasi.BarchasiData
 import com.example.handybook.databinding.FragmentBatafsilBinding
 import com.example.handybook.module.Book
+import com.example.handybook.romanlarRV.RomanlarData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -40,12 +41,14 @@ class BatafsilFragment : Fragment() {
             booksJson,
             object : TypeToken<ArrayList<Book>>() {}.type
         )
-        var book = arguments?.getSerializable("book") as BarchasiData
-        binding.bookImage.setImageResource(book.img)
-        binding.rating.text = book.rating
-        binding.author.text = book.author
-        binding.price.text = book.price
-
+        var book = arguments?.getSerializable("books") as RomanlarData?
+        if (book != null) {
+            binding.bookImage.setImageResource(book.bookImg)
+            binding.rating.text = book.bookRating
+            binding.author.text = book.bookAuthor
+            binding.price.text = book.bookAuthor
+            binding.name.text = book.bookName
+        }
         return binding.root
     }
 

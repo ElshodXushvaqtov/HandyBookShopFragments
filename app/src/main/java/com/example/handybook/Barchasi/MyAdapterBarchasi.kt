@@ -4,17 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.handybook.R
+import com.example.handybook.databinding.FragmentBarchasiBinding
 import com.example.handybook.module.Book
 
 class MyAdapterBarchasi(
     private val barchasiArray: ArrayList<BarchasiData>, var context: Context,
-    private var myInterface: MyInterface = object : MyInterface {
-        override fun onItemTap(book: BarchasiData) {}
-    }
 ) :
     RecyclerView.Adapter<MyAdapterBarchasi.MyHolder>() {
 
@@ -28,14 +27,12 @@ class MyAdapterBarchasi(
 
     }
 
-    interface MyInterface {
-        fun onItemTap(book: BarchasiData)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
-
-        return MyHolder(
+        val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.barchasi_item, parent, false)
+        return MyHolder(
+            itemView
         )
 
     }
@@ -52,9 +49,6 @@ class MyAdapterBarchasi(
         holder.author.text = barchasi_arr.author
         holder.rating.text = barchasi_arr.rating
 
-        holder.itemView.setOnClickListener {
-            myInterface.onItemTap(barchasi_arr)
-        }
     }
 
 

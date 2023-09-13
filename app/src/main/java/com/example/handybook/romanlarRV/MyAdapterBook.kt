@@ -12,21 +12,18 @@ import com.example.handybook.R
 
 class MyAdapterBook(
     private val arrBook: ArrayList<RomanlarData>, var context: Context,
-    private var myInterface: MyAdapterBook.MyInterface = object :
-        MyAdapterBook.MyInterface {
+    private var myInterface: MyInterface = object : MyInterface {
         override fun onItemTap(book: RomanlarData) {}
     }
 ) :
     RecyclerView.Adapter<MyAdapterBook.MyHolder>() {
-
-
-    class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MyHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
 
         val bookName: TextView = itemView.findViewById(R.id.book_name)
         val bookAuthor: TextView = itemView.findViewById(R.id.book_author)
         val bookImg: ImageView = itemView.findViewById(R.id.bookImg)
         val bookRating: TextView = itemView.findViewById(R.id.bookRating)
-
 
     }
 
@@ -50,7 +47,6 @@ class MyAdapterBook(
         holder.bookAuthor.text = book.bookAuthor
         holder.bookImg.setImageResource(book.bookImg)
         holder.bookRating.text = book.bookRating
-
         holder.itemView.setOnClickListener {
             myInterface.onItemTap(book)
         }

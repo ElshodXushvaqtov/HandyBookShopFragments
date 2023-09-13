@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.handybook.Barchasi.BarchasiData
 import com.example.handybook.Barchasi.MyAdapterBarchasi
@@ -38,6 +39,7 @@ class BarchasiFragment : Fragment() {
         binding.barchasiRv.setHasFixedSize(true)
         binding.barchasiRv.layoutManager = GridLayoutManager(requireParentFragment().context, 2)
         binding.barchasiRv.adapter = MyAdapterBarchasi(barchasiArr, requireContext())
+
 
         return binding.root
     }
