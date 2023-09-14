@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ism_reg"
+        android:id="@+id/ism_regg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ism_reg">
+        app:layout_constraintTop_toBottomOf="@+id/ism_regg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ismReg"
@@ -61,7 +61,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/email_reg"
+        android:id="@+id/email_regg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_reg">
+        app:layout_constraintTop_toBottomOf="@+id/email_regg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailReg"
@@ -91,7 +91,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/parol_reg"
+        android:id="@+id/parol_regg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -112,7 +112,7 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:endIconMode="password_toggle"
-        app:layout_constraintTop_toBottomOf="@+id/parol_reg">
+        app:layout_constraintTop_toBottomOf="@+id/parol_regg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/parolReg"

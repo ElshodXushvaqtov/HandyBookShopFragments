@@ -1,6 +1,7 @@
 package com.example.handybook
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,15 +14,22 @@ import com.google.gson.Gson
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+
+
 class SettingsFragment : Fragment() {
+    private lateinit var binding: FragmentSettingsBinding
+
     private var param1: String? = null
     private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
+
         }
     }
 
@@ -29,18 +37,20 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         val shared = requireContext().getSharedPreferences("shared", AppCompatActivity.MODE_PRIVATE)
         val gson = Gson()
         val userJson = shared.getString("active_user", null)
         val user: User = gson.fromJson(userJson, User::class.java)
 
-        println(user.toString())
 
         binding.name.text = user.username
         binding.password.text = user.password
         binding.email.text = user.email
+        Log.d("BBB", user.username)
+
+
 
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }

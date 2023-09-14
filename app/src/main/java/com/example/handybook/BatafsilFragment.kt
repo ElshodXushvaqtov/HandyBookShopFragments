@@ -36,19 +36,17 @@ class BatafsilFragment : Fragment() {
 
         val shared = requireContext().getSharedPreferences("shared", Context.MODE_PRIVATE)
         val gson = Gson()
-        val booksJson = shared.getString("books", null)
+        val booksJson = shared.getString("book", null)
         val books = gson.fromJson<ArrayList<BarchasiData>>(
             booksJson,
             object : TypeToken<ArrayList<Book>>() {}.type
         )
-        var book = arguments?.getSerializable("books") as RomanlarData?
-        if (book != null) {
-            binding.bookImage.setImageResource(book.bookImg)
-            binding.rating.text = book.bookRating
-            binding.author.text = book.bookAuthor
-            binding.price.text = book.bookAuthor
-            binding.name.text = book.bookName
-        }
+        val book = arguments?.getSerializable("book") as RomanlarData
+        binding.bookImage.setImageResource(book.bookImg)
+        binding.rating.text = book.bookRating
+        binding.author.text = book.bookAuthor
+        binding.price.text = book.bookAuthor
+        binding.name.text = book.bookName
         return binding.root
     }
 

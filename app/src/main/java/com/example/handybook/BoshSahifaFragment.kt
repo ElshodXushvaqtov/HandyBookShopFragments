@@ -94,7 +94,8 @@ class BoshSahifaFragment : Fragment() {
         binding.romanlarRv.adapter =
             MyAdapterBook(books, requireContext(), object : MyAdapterBook.MyInterface {
                 override fun onItemTap(book: RomanlarData) {
-                    var bundle = bundleOf("book" to book)
+                    val bundle = bundleOf("book" to book)
+
                     findNavController().navigate(
                         R.id.action_mainFragment_to_batafsilFragment,
                         bundle

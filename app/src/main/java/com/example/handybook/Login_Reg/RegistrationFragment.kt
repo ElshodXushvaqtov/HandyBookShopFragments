@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,17 +54,11 @@ class RegistrationFragment : Fragment() {
         myDialog.setContentView(dialogBinding)
         myDialog.setCancelable(true)
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        user = User(
-            binding.ismReg.text.toString(),
-            binding.parolReg.text.toString(),
-            binding.emailReg.text.toString(),
-        )
         binding.royhatdanOtishBtn.setOnClickListener {
             val users = shared.getString("users", "")
             if (users == "") {
-            userList= mutableListOf()
-            }
-            else {
+                userList = mutableListOf()
+            } else {
                 user = gson.fromJson(users, convert)
             }
             user = User(
@@ -71,7 +66,6 @@ class RegistrationFragment : Fragment() {
                 binding.parolReg.text.toString(),
                 binding.emailReg.text.toString(),
             )
-
             if (check()) {
                 val s = gson.toJson(user)
                 edit.putString("users", s).apply()
@@ -79,6 +73,9 @@ class RegistrationFragment : Fragment() {
                 Handler(Looper.getMainLooper()).postDelayed({
                     findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
                     shared.edit().putString("active_user", gson.toJson(user)).apply()
+                    Log.d("AAA", user.username)
+                    Log.d("AAB", user.password)
+                    Log.d("AAC", user.email)
                     myDialog.dismiss()
                 }, 2000)
 
@@ -110,22 +107,22 @@ class RegistrationFragment : Fragment() {
             return false
         }
 
-//        if (binding.parolReg.text.toString() != binding.parolCheckReg.text.toString()) {
-//            Toast.makeText(requireContext(), "Your password isn't the same!", Toast.LENGTH_SHORT)
-//                .show()
-//            return false
-//        }
+        if (binding.parolReg.text.toString() != binding.parolCheckReg.text.toString()) {
+            Toast.makeText(requireContext(), "Your password isn't the same!", Toast.LENGTH_SHORT)
+                .show()
+            return false
+        }
 
-//        for (i in userList.indices) {
-//            if (binding.ismReg.text.toString() == userList[i].username) {
-//                Toast.makeText(
-//                    requireContext(),
-//                    "User with this username already registered",
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//                return false
-//            }
-
+        for (i in userList.indices) {
+            if (binding.ismReg.text.toString() == userList[i].username) {
+                Toast.makeText(
+                    requireContext(),
+                    "User with this username already registered",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return false
+            }
+        }
         return true
     }
 }
