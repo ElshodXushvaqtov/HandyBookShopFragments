@@ -29,7 +29,6 @@ class BoshSahifaFragment : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentBoshSahifaBinding
     private lateinit var typesArray: ArrayList<BookTypeData>
-    private lateinit var arrRoman: ArrayList<RomanlarData>
     private lateinit var darsliklarArray: ArrayList<DarsliklarData>
     private lateinit var books: ArrayList<RomanlarData>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,8 +40,7 @@ class BoshSahifaFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentBoshSahifaBinding.inflate(layoutInflater)
 
@@ -53,24 +51,31 @@ class BoshSahifaFragment : Fragment() {
         val shared = requireContext().getSharedPreferences("shared", Context.MODE_PRIVATE)
         val gson = Gson()
 
-        if (shared.getString("books", null) == null) {
+
+        if (shared.getString("romanlar", null) == null) {
             BookApi(requireContext()).dataBooks()
         }
-
-        var booksJson = shared.getString("books", null)
-        books = gson.fromJson(booksJson, object : TypeToken<ArrayList<RomanlarData>>() {}.type)
-
-        setMainDefaultRvUI()
+        val romanlarJson = shared.getString("romanlar", null)
+        books = gson.fromJson(romanlarJson, object : TypeToken<ArrayList<RomanlarData>>() {}.type)
+        setRomanlarData()
         binding.romanlarRv.setHasFixedSize(true)
+
+
 
         binding.filter.setOnClickListener {
             findNavController().navigate(R.id.filterFragment)
         }
 
 
-        dataDarsliklar()
+        if (shared.getString("darsliklar", null) == null) {
+            BookApi(requireContext()).dataDarsliklar()
+        }
+        val darsliklarJson = shared.getString("darsliklar", null)
+        darsliklarArray =
+            gson.fromJson(darsliklarJson, object : TypeToken<ArrayList<DarsliklarData>>() {}.type)
+        setDarsliklarData()
         binding.darsliklarRV.setHasFixedSize(true)
-        binding.darsliklarRV.adapter = MyAdapterDarsliklar(darsliklarArray)
+
 
         binding.barchaKitoblarTxt.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_barchasiFragment)
@@ -81,24 +86,37 @@ class BoshSahifaFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BoshSahifaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(param1: String, param2: String) = BoshSahifaFragment().apply {
+            arguments = Bundle().apply {
+                putString(ARG_PARAM1, param1)
+                putString(ARG_PARAM2, param2)
             }
+        }
     }
 
-    private fun setMainDefaultRvUI() {
+    private fun setRomanlarData() {
         binding.romanlarRv.adapter =
             MyAdapterBook(books, requireContext(), object : MyAdapterBook.MyInterface {
                 override fun onItemTap(book: RomanlarData) {
-                    val bundle = bundleOf("book" to book)
+                    val bundle = bundleOf("roman" to book)
 
                     findNavController().navigate(
-                        R.id.action_mainFragment_to_batafsilFragment,
-                        bundle
+                        R.id.action_mainFragment_to_batafsilFragment, bundle
+                    )
+                }
+            })
+        binding.romanlarRv.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    }
+
+    private fun setDarsliklarData() {
+        binding.darsliklarRV.adapter = MyAdapterDarsliklar(darsliklarArray,
+            requireContext(),
+            object : MyAdapterDarsliklar.MyInterface {
+                override fun onItemTap(darslik: DarsliklarData) {
+                    val bundle = bundleOf("dars" to darslik)
+                    findNavController().navigate(
+                        R.id.action_mainFragment_to_batafsilFragment, bundle
                     )
                 }
             })
@@ -120,19 +138,6 @@ class BoshSahifaFragment : Fragment() {
         typesArray.add(BookTypeData("Romanlar"))
     }
 
-
-    private fun dataDarsliklar() {
-
-        darsliklarArray = arrayListOf()
-
-        darsliklarArray.add(DarsliklarData(R.drawable.algebra))
-        darsliklarArray.add(DarsliklarData(R.drawable.fizika))
-        darsliklarArray.add(DarsliklarData(R.drawable.ona_tili))
-        darsliklarArray.add(DarsliklarData(R.drawable.algebra))
-        darsliklarArray.add(DarsliklarData(R.drawable.fizika))
-        darsliklarArray.add(DarsliklarData(R.drawable.ona_tili))
-
-    }
 
 }
 

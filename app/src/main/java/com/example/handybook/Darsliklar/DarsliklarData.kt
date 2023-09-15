@@ -1,3 +1,6 @@
 package com.example.handybook.Darsliklar
 
-data class DarsliklarData(var darslikImg:Int)
+import java.io.Serializable
+
+data class DarsliklarData(var darslikImg: Int, var darslikName: String, var darslikAuthor: String) :
+    Serializable

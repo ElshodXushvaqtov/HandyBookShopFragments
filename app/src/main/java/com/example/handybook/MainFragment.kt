@@ -1,19 +1,23 @@
 package com.example.handybook
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.handybook.databinding.FragmentMainBinding
+import com.google.android.material.navigation.NavigationView
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentMainBinding
@@ -63,9 +67,11 @@ class MainFragment : Fragment() {
         }
 
         drawer = binding.drawerLayout
-        var navigationView = binding.navView
+        val navigationView = binding.navView
+
+
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        var toggle = ActionBarDrawerToggle(
+        val toggle = ActionBarDrawerToggle(
             requireActivity(),
             binding.drawerLayout,
             R.string.open,
@@ -73,6 +79,8 @@ class MainFragment : Fragment() {
         )
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+
         if (savedInstanceState == null) {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.container, BoshSahifaFragment()).commit();
@@ -93,6 +101,38 @@ class MainFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.home_nav -> {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, MainFragment()).commit()
+                binding.bottomNavigationView.selectedItemId = R.id.home
+            }
+
+            R.id.search_nav -> {
+                Toast.makeText(requireContext(), "Search clicked", Toast.LENGTH_SHORT).show()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SearchFragment()).commit()
+                binding.bottomNavigationView.selectedItemId = R.id.search
+            }
+
+            R.id.saved_nav -> {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SavedFragment()).commit()
+                binding.bottomNavigationView.selectedItemId = R.id.saved
+            }
+
+            R.id.lang_nav -> {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SettingsFragment()).commit()
+                binding.bottomNavigationView.selectedItemId = R.id.settings
+            }
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
     }
 
     private fun loadFragment(fragment: Fragment) {

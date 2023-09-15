@@ -5,11 +5,40 @@
     android:layout_width="105dp"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/darslikImg"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/algebra" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/darslikImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/algebra" />
+
+        <TextView
+            android:id="@+id/darslikName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Algebra"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="120dp"
+            />
+        <TextView
+            android:id="@+id/darslikAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Davlat"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="122dp"
+            />
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

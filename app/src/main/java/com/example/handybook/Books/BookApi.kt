@@ -1,6 +1,7 @@
 package com.example.handybook.Books
 
 import android.content.Context
+import com.example.handybook.Darsliklar.DarsliklarData
 import com.example.handybook.R
 import com.example.handybook.romanlarRV.RomanlarData
 import com.google.gson.Gson
@@ -73,7 +74,24 @@ class BookApi(context:Context) {
         )
 
         val booksJson = gson.toJson(arrRoman)
-        shared.edit().putString("books", booksJson).apply()
+        shared.edit().putString("romanlar", booksJson).apply()
+    }
+
+     fun dataDarsliklar() {
+
+       var darsliklarArray = ArrayList<DarsliklarData>()
+
+        darsliklarArray.add(DarsliklarData(R.drawable.algebra,"Algebra","Davlat"))
+        darsliklarArray.add(DarsliklarData(R.drawable.fizika,"Fizika","Nyuton"))
+        darsliklarArray.add(DarsliklarData(R.drawable.ona_tili,"Ona tili","Navoiy"))
+         darsliklarArray.add(DarsliklarData(R.drawable.algebra,"Algebra","Davlat"))
+        darsliklarArray.add(DarsliklarData(R.drawable.fizika,"Fizika","Nyuton"))
+        darsliklarArray.add(DarsliklarData(R.drawable.ona_tili,"Ona tili","Mavoiy"))
+
+
+         val booksJson = gson.toJson(darsliklarArray)
+         shared.edit().putString("darsliklar", booksJson).apply()
+
     }
 
 }

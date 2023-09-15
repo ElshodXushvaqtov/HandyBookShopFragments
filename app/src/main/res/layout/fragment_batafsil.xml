@@ -87,6 +87,7 @@
                 android:text="5.0 ⭐️"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
@@ -176,13 +177,13 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/share_btn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:text="Add to saved"
+        android:text="Share"
         android:textAllCaps="false"
         android:textColor="#0F1D4D"
-
         app:backgroundTint="#B8E8F2"
         app:cornerRadius="200dp" />
 

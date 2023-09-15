@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.handybook.Barchasi.BarchasiData
+import com.example.handybook.Darsliklar.DarsliklarData
 import com.example.handybook.databinding.FragmentBatafsilBinding
 import com.example.handybook.module.Book
 import com.example.handybook.romanlarRV.RomanlarData
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -33,20 +35,41 @@ class BatafsilFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBatafsilBinding.inflate(layoutInflater)
-
         val shared = requireContext().getSharedPreferences("shared", Context.MODE_PRIVATE)
         val gson = Gson()
-        val booksJson = shared.getString("book", null)
-        val books = gson.fromJson<ArrayList<BarchasiData>>(
-            booksJson,
-            object : TypeToken<ArrayList<Book>>() {}.type
-        )
-        val book = arguments?.getSerializable("book") as RomanlarData
-        binding.bookImage.setImageResource(book.bookImg)
-        binding.rating.text = book.bookRating
-        binding.author.text = book.bookAuthor
-        binding.price.text = book.bookAuthor
-        binding.name.text = book.bookName
+
+//        val romanlar = shared.getString("roman", null)
+//        val books = gson.fromJson<ArrayList<BarchasiData>>(
+//            romanlar,
+//            object : TypeToken<ArrayList<Book>>() {}.type
+//        )
+        if (arguments?.containsKey("roman") == true) {
+            val roman = arguments?.getSerializable("roman") as RomanlarData
+            binding.bookImage.setImageResource(roman.bookImg)
+            binding.rating.text = roman.bookRating
+            binding.author.text = roman.bookAuthor
+            binding.price.text = roman.bookAuthor
+            binding.name.text = roman.bookName
+            return binding.root
+        }
+
+//        val darsliklar = shared.getString("darslik", null)
+
+        if (arguments?.containsKey("dars") == true) {
+            val darslik = arguments?.getSerializable("dars") as DarsliklarData
+            binding.bookImage.setImageResource(darslik.darslikImg)
+            binding.rating.text = "5.0"
+            binding.author.text = darslik.darslikAuthor
+            binding.price.text = "$10.00"
+            binding.name.text = darslik.darslikName
+            return binding.root
+
+        }
+
+        binding.shareBtn.setOnClickListener {
+            showShareDialog()
+        }
+
         return binding.root
     }
 
@@ -59,5 +82,12 @@ class BatafsilFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun showShareDialog() {
+        val shareView = layoutInflater.inflate(R.layout.share_dialog, null)
+        val dialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialog)
+        dialog.setContentView(shareView)
+        dialog.show()
     }
 }
