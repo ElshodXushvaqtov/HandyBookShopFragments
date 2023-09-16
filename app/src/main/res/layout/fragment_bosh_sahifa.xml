@@ -62,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/search_editt"
             android:layout_width="340dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
@@ -74,7 +74,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:id="@+id/searchInputt"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -88,7 +89,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/search_editt">
 
             <ImageView
                 android:id="@+id/imageView10"
@@ -140,7 +141,7 @@
             android:elevation="100dp"
             android:src="@drawable/bahor_qaytmaydi"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/search_editt" />
 
         <TextView
             android:id="@+id/textView5"

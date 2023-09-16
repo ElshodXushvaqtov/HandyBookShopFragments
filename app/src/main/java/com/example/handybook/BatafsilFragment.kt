@@ -66,6 +66,17 @@ class BatafsilFragment : Fragment() {
 
         }
 
+        if (arguments?.containsKey("searchBook") == true) {
+            val searchBooks = arguments?.getSerializable("searchBook") as DarsliklarData
+            binding.bookImage.setImageResource(searchBooks.darslikImg)
+            binding.rating.text = "5.0"
+            binding.author.text = searchBooks.darslikAuthor
+            binding.price.text = "$10.00"
+            binding.name.text = searchBooks.darslikName
+            return binding.root
+
+        }
+
         binding.shareBtn.setOnClickListener {
             showShareDialog()
         }

@@ -81,6 +81,10 @@ class BoshSahifaFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_barchasiFragment)
         }
 
+        binding.searchInputt.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_searchFragment)
+        }
+
         return binding.root
     }
 
