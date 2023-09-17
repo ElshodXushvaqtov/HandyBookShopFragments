@@ -49,9 +49,9 @@ class LoginFragment : Fragment() {
 
         binding.kirishBtn.setOnClickListener {
 
-            if (users != "") {
-                userList = gson.fromJson(users, convert)
-            }
+//            if (users != "") {
+//                userList = gson.fromJson(users, convert)
+//            }
 
             for (user in userList) {
                 if ((binding.emailKirish.text.toString() == user.username || binding.emailKirish.text.toString() == user.email) && binding.parolKirish.text.toString() == user.password) {

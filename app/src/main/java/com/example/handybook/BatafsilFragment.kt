@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.handybook.Barchasi.BarchasiData
 import com.example.handybook.Darsliklar.DarsliklarData
 import com.example.handybook.databinding.FragmentBatafsilBinding
@@ -50,6 +51,10 @@ class BatafsilFragment : Fragment() {
             binding.author.text = roman.bookAuthor
             binding.price.text = roman.bookAuthor
             binding.name.text = roman.bookName
+            binding.shareBtn.setOnClickListener {
+                showShareDialog()
+            }
+            back()
             return binding.root
         }
 
@@ -62,6 +67,10 @@ class BatafsilFragment : Fragment() {
             binding.author.text = darslik.darslikAuthor
             binding.price.text = "$10.00"
             binding.name.text = darslik.darslikName
+            binding.shareBtn.setOnClickListener {
+                showShareDialog()
+            }
+            back()
             return binding.root
 
         }
@@ -73,13 +82,15 @@ class BatafsilFragment : Fragment() {
             binding.author.text = searchBooks.darslikAuthor
             binding.price.text = "$10.00"
             binding.name.text = searchBooks.darslikName
+            binding.shareBtn.setOnClickListener {
+                showShareDialog()
+            }
+            back()
             return binding.root
 
         }
 
-        binding.shareBtn.setOnClickListener {
-            showShareDialog()
-        }
+
 
         return binding.root
     }
@@ -93,6 +104,12 @@ class BatafsilFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun back() {
+        binding.arrowBack.setOnClickListener {
+            findNavController().navigate(R.id.mainFragment)
+        }
     }
 
     private fun showShareDialog() {

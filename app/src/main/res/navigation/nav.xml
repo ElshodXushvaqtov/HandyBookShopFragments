@@ -72,13 +72,20 @@
         <action
             android:id="@+id/action_barchasiFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_barchasiFragment_to_mainFragment2"
+            app:destination="@id/mainFragment" />
 
     </fragment>
     <fragment
         android:id="@+id/batafsilFragment"
         android:name="com.example.handybook.BatafsilFragment"
         android:label="fragment_batafsil"
-        tools:layout="@layout/fragment_batafsil" />
+        tools:layout="@layout/fragment_batafsil" >
+        <action
+            android:id="@+id/action_batafsilFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.handybook.MainFragment"
@@ -95,11 +102,6 @@
             app:destination="@id/searchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/filterFragment"
-        android:name="com.example.handybook.FilterFragment"
-        android:label="fragment_filter"
-        tools:layout="@layout/fragment_filter" />
-    <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.handybook.SearchFragment"
         android:label="fragment_search"
@@ -107,5 +109,8 @@
         <action
             android:id="@+id/action_searchFragment_to_batafsilFragment"
             app:destination="@id/batafsilFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

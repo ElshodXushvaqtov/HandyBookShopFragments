@@ -46,7 +46,16 @@ class BoshSahifaFragment : Fragment() {
 
         dataType()
         binding.typeRV.setHasFixedSize(true)
-        binding.typeRV.adapter = MyAdapterType(typesArray)
+        binding.typeRV.adapter =
+            MyAdapterType(typesArray, requireContext(), object : MyAdapterType.MyInterface {
+                override fun onItemTap(bookType: BookTypeData) {
+                    val bundle = bundleOf(bookType.typeName to bookType)
+                    findNavController().navigate(
+                        R.id.action_mainFragment_to_barchasiFragment,
+                        bundle
+                    )
+                }
+            })
 
         val shared = requireContext().getSharedPreferences("shared", Context.MODE_PRIVATE)
         val gson = Gson()
@@ -61,12 +70,6 @@ class BoshSahifaFragment : Fragment() {
         binding.romanlarRv.setHasFixedSize(true)
 
 
-
-        binding.filter.setOnClickListener {
-            findNavController().navigate(R.id.filterFragment)
-        }
-
-
         if (shared.getString("darsliklar", null) == null) {
             BookApi(requireContext()).dataDarsliklar()
         }
@@ -78,12 +81,15 @@ class BoshSahifaFragment : Fragment() {
 
 
         binding.barchaKitoblarTxt.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_barchasiFragment)
+            val bundle = bundleOf("barchasi" to "")
+            findNavController().navigate(R.id.action_mainFragment_to_barchasiFragment, bundle)
         }
 
         binding.searchInputt.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_searchFragment)
         }
+
+
 
         return binding.root
     }
@@ -136,10 +142,8 @@ class BoshSahifaFragment : Fragment() {
         typesArray.add(BookTypeData("Diniy Kitoblar"))
         typesArray.add(BookTypeData("Bepul Kitoblar"))
         typesArray.add(BookTypeData("Romanlar"))
-        typesArray.add(BookTypeData("Darsliklar"))
-        typesArray.add(BookTypeData("Diniy Kitoblar"))
-        typesArray.add(BookTypeData("Bepul Kitoblar"))
-        typesArray.add(BookTypeData("Romanlar"))
+        typesArray.add(BookTypeData("Xit"))
+        typesArray.add(BookTypeData("Chegirma"))
     }
 
 

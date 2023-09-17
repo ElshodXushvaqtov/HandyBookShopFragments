@@ -40,11 +40,11 @@ class SplashFragment : Fragment() {
 
             Handler(Looper.getMainLooper()).postDelayed({
                 if (users == "") {
-                    findNavController().navigate(R.id.action_splashFragment_to_splashScreen)
+                    findNavController().navigate(R.id.splashScreen)
                 } else if (isLoggedOut) {
-                    findNavController().navigate(R.id.action_splashScreen_to_loginFragment)
+                    findNavController().navigate(R.id.loginFragment)
                 } else {
-                    findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
+                    findNavController().navigate(R.id.mainFragment)
                 }
             }, 3000)
         }, 2500)

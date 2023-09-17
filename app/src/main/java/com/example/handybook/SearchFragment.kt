@@ -34,7 +34,9 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSearchBinding.inflate(layoutInflater)
-
+        binding.back.setOnClickListener {
+            findNavController().navigate(R.id.mainFragment)
+        }
         searchData()
         binding.searchRv.adapter =
             SearchAdapter(searchArr, requireContext(), object : SearchAdapter.MyInterface {

@@ -54,36 +54,37 @@ class RegistrationFragment : Fragment() {
         myDialog.setContentView(dialogBinding)
         myDialog.setCancelable(true)
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val users = shared.getString("users", "")
+        binding.backToLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+        }
+        userList = mutableListOf()
         binding.royhatdanOtishBtn.setOnClickListener {
-            val users = shared.getString("users", "")
-            if (users == "") {
-                userList = mutableListOf()
-            } else {
-                user = gson.fromJson(users, convert)
-            }
             user = User(
                 binding.ismReg.text.toString(),
                 binding.parolReg.text.toString(),
                 binding.emailReg.text.toString(),
             )
+
             if (check()) {
+                userList.add(user)
                 val s = gson.toJson(user)
                 edit.putString("users", s).apply()
+                shared.edit().putBoolean("isLoggedOut", false).apply()
                 myDialog.show()
                 Handler(Looper.getMainLooper()).postDelayed({
                     findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
                     shared.edit().putString("active_user", gson.toJson(user)).apply()
                     Log.d("AAA", user.username)
-                    Log.d("AAB", user.password)
+                    Log.d("AAB", s)
                     Log.d("AAC", user.email)
+                    Log.d("BBC", userList.toString())
                     myDialog.dismiss()
                 }, 2000)
 
             }
         }
-        binding.backToLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
-        }
+
         return binding.root
     }
 

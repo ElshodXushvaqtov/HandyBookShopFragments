@@ -33,10 +33,10 @@ class SplashScreen : Fragment() {
     ): View {
         binding = FragmentSplashScreenBinding.inflate(layoutInflater)
         binding.kirishBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_splashScreen_to_loginFragment)
+            findNavController().navigate(R.id.loginFragment)
         }
         binding.royhatdanOtishTxt.setOnClickListener {
-            findNavController().navigate(R.id.action_splashScreen_to_registrationFragment)
+            findNavController().navigate(R.id.registrationFragment)
         }
         return binding.root
     }
