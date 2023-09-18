@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.handybook.R
 import com.example.handybook.databinding.FragmentRegistrationBinding
@@ -72,8 +73,12 @@ class RegistrationFragment : Fragment() {
                 edit.putString("users", s).apply()
                 shared.edit().putBoolean("isLoggedOut", false).apply()
                 myDialog.show()
+                val bundle = bundleOf("person" to user)
                 Handler(Looper.getMainLooper()).postDelayed({
-                    findNavController().navigate(R.id.action_registrationFragment_to_mainFragment)
+                    findNavController().navigate(
+                        R.id.action_registrationFragment_to_mainFragment,
+                        bundle
+                    )
                     shared.edit().putString("active_user", gson.toJson(user)).apply()
                     Log.d("AAA", user.username)
                     Log.d("AAB", s)
