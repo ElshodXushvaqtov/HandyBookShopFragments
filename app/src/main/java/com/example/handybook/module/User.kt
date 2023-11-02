@@ -1,4 +1,4 @@
-package com.example.handybook.Login_Reg
+package com.example.handybook.module
 
 import java.io.Serializable
 

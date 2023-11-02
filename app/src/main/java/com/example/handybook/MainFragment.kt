@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import com.example.handybook.Login_Reg.User
+import com.example.handybook.module.User
 import com.example.handybook.databinding.FragmentMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson

@@ -18,6 +18,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.handybook.R
 import com.example.handybook.databinding.FragmentRegistrationBinding
+import com.example.handybook.module.User
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

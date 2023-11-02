@@ -1,7 +1,6 @@
 package com.example.handybook.Login_Reg
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.handybook.R
 import com.example.handybook.databinding.FragmentLoginBinding
+import com.example.handybook.module.User
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
