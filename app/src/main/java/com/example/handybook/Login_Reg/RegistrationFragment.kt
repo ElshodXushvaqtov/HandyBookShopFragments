@@ -8,19 +8,25 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.handybook.R
+import com.example.handybook.api.ApiClient
+import com.example.handybook.api.ApiService
 import com.example.handybook.databinding.FragmentRegistrationBinding
 import com.example.handybook.module.User
+import com.example.handybook.module.UserToken
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -47,21 +53,30 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegistrationBinding.inflate(layoutInflater)
+
+
         val shared = requireContext().getSharedPreferences("shared", AppCompatActivity.MODE_PRIVATE)
         val edit = shared.edit()
         val gson = Gson()
         val convert = object : TypeToken<List<User>>() {}.type
+
+
         val dialogBinding = layoutInflater.inflate(R.layout.custom_dialog, null)
         val myDialog = Dialog(requireContext())
         myDialog.setContentView(dialogBinding)
         myDialog.setCancelable(true)
         myDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        val users = shared.getString("users", "")
+
+
+
         binding.backToLogin.setOnClickListener {
             findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
         }
         userList = mutableListOf()
         binding.royhatdanOtishBtn.setOnClickListener {
+
+            val users = shared.getString("users", "")
+
             user = User(
                 binding.ismReg.text.toString(),
                 binding.parolReg.text.toString(),
@@ -69,24 +84,35 @@ class RegistrationFragment : Fragment() {
             )
 
             if (check()) {
-                userList.add(user)
-                val s = gson.toJson(user)
-                edit.putString("users", s).apply()
-                shared.edit().putBoolean("isLoggedOut", false).apply()
+//                userList.add(user)
+//                val s = gson.toJson(user)
+//                edit.putString("users", s).apply()
+//                shared.edit().putBoolean("isLoggedOut", false).apply()
                 myDialog.show()
-                val bundle = bundleOf("person" to user)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    findNavController().navigate(
-                        R.id.action_registrationFragment_to_mainFragment,
-                        bundle
-                    )
-                    shared.edit().putString("active_user", gson.toJson(user)).apply()
-                    Log.d("AAA", user.username)
-                    Log.d("AAB", s)
-                    Log.d("AAC", user.email)
-                    Log.d("BBC", userList.toString())
-                    myDialog.dismiss()
-                }, 2000)
+                val api = ApiClient.getInstance().create(ApiService::class.java)
+
+                api.register(user).enqueue(object : Callback<UserToken> {
+                    override fun onResponse(call: Call<UserToken>, response: Response<UserToken>) {
+                        val bundle = bundleOf("person" to user)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            findNavController().navigate(
+                                R.id.action_registrationFragment_to_mainFragment,
+                                bundle
+                            )
+//                    shared.edit().putString("active_user", gson.toJson(user)).apply()
+//                    Log.d("AAA", user.username)
+//                    Log.d("AAB", s)
+//                    Log.d("AAC", user.email)
+//                    Log.d("BBC", userList.toString())
+                            myDialog.dismiss()
+                        }, 2000)
+                    }
+
+                    override fun onFailure(call: Call<UserToken>, t: Throwable) {
+                        Log.d("AAA", "onFailure: $t")
+                    }
+                })
+
 
             }
         }
@@ -133,3 +159,4 @@ class RegistrationFragment : Fragment() {
         return true
     }
 }
+
