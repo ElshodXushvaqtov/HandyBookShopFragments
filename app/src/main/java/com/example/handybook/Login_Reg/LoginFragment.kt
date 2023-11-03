@@ -89,14 +89,12 @@ class LoginFragment : Fragment() {
                     Log.d("BBB", "onFailure: $t")
                 }
             })
-
+            Toast.makeText(
+                requireContext(),
+                "Username yoki Parol xato!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
-//            Toast.makeText(
-//                requireContext(),
-//                "Username yoki Parol xato!",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
         binding.royhatdanOtishKirish.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
         }
