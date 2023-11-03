@@ -20,13 +20,18 @@ interface ApiService {
     fun login(@Body login: Login): Call<UserToken>
 
     @GET("/book-api")
-    fun allBooks():Call<Books>
+    fun allBooks(): Call<Books>
 
     @GET("/book-api/view")
-    fun getBook(@Query("id") id : Int):Call<BookData>
+    fun getBook(@Query("id") id: Int): Call<BookData>
 
     @GET("/book-api/all-category")
-    fun getCategories()
+    fun getCategories(): Call<List<String>>
 
+    @GET("/book-api/category")
+    fun getCategoriesBooks(@Query("name") name: String): Call<Books>
+
+    @GET("/book-api/search")
+    fun searchBook(@Query("name") name: String): Call<Books>
 
 }
